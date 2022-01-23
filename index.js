@@ -4,7 +4,7 @@
 // Node CLI 应用入口文件必须要有这样的文件头
 // 如果是Linux 或者 macOS 系统下还需要修改此文件的读写权限为 755
 // 具体就是通过 chmod 755 cli.js 实现修改
-const {version} = require('../package.json');
+const { version } = require('./package.json');
 console.log()
 
 const inquirer = require('inquirer');    //在node提示框中输入信息
@@ -15,7 +15,7 @@ const { program } = require('commander');
 const fs = require('fs-extra');   // fs的扩展，支持promise
 const figlet = require('figlet');
 
-const Generator = require('./Generator')
+const Generator = require('./lib/Generator')
 
 /* 
  * 控制台打印logo
@@ -32,7 +32,7 @@ console.log(
 /*
  * 脚手架命令
 */
-let project_default = 'my-project'; 
+let project_default = 'my-project';
 program
     .version(version)
     .command('create <project-name>')
@@ -68,9 +68,9 @@ inquirer.prompt([
     // 生成文件目录
     // process.cwd() 对应控制台所在目录
     const cwd = process.cwd();
-    const project_file = path.join(cwd,project_name); // 获取项目文件夹路径
+    const project_file = path.join(cwd, project_name); // 获取项目文件夹路径
     // 判断是否已经创建过同名的项目文件夹
-    if (fs.existsSync(project_file)) { 
+    if (fs.existsSync(project_file)) {
         await fs.remove(targetAir)
     }
     // 开始创建项目
@@ -85,7 +85,7 @@ inquirer.prompt([
     //         // reßnderFile（模版文件地址，传入渲染数据）
     //         ejs.renderFile(path.join(destUrl, file), answers).then(data => {
     //             // 生成 ejs 处理后的模版文件
-               
+
     //             fs.writeFileSync(path.join(cwd, file), data)
     //         })
     //     })

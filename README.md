@@ -1,4 +1,8 @@
-# wwei-cli 脚手架源码
-
-> cli：脚手架代码；
-> vue2.0-template：vue2.0版本模版下载代码；
+# wwei-cli 脚手架
+> 自制简单的脚手架，方便自己初始化项目
+```js
+// 安装
+npm install wwei-cli
+// 创建项目
+wwei-cli create <项目名称>
+```
