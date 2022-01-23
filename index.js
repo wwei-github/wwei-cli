@@ -4,17 +4,14 @@
 // Node CLI 应用入口文件必须要有这样的文件头
 // 如果是Linux 或者 macOS 系统下还需要修改此文件的读写权限为 755
 // 具体就是通过 chmod 755 cli.js 实现修改
-const { version } = require('./package.json');
-console.log()
 
+const { version } = require('./package.json');
 const inquirer = require('inquirer');    //在node提示框中输入信息
 const path = require('path')
-// const fs = require('fs')
 const ejs = require('ejs')
 const { program } = require('commander');
 const fs = require('fs-extra');   // fs的扩展，支持promise
 const figlet = require('figlet');
-
 const Generator = require('./lib/Generator')
 
 /* 
@@ -76,21 +73,6 @@ inquirer.prompt([
     // 开始创建项目
     const generator = new Generator(project_name, project_file);
     await generator.create();
-
-    // 从模版目录中读取文件
-    // fs.readdir(destUrl, (err, files) => {
-    //     if (err) throw err;
-    //     files.forEach((file) => {
-    //         // 使用 ejs 渲染对应的模版文件
-    //         // reßnderFile（模版文件地址，传入渲染数据）
-    //         ejs.renderFile(path.join(destUrl, file), answers).then(data => {
-    //             // 生成 ejs 处理后的模版文件
-
-    //             fs.writeFileSync(path.join(cwd, file), data)
-    //         })
-    //     })
-
-    // })
 })
 
 
