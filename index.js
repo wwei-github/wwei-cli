@@ -12,7 +12,9 @@ const ejs = require('ejs')
 const { program } = require('commander');
 const fs = require('fs-extra');   // fs的扩展，支持promise
 const figlet = require('figlet');
-const Generator = require('./lib/Generator')
+
+// const Generator = require('./lib/Generator');
+// const npminstall = require('npminstall');
 
 /* 
  * 控制台打印logo
@@ -57,7 +59,6 @@ inquirer.prompt([
         default: project_default// 默认值
     }
 ]).then(async answers => {
-    console.log('answers', answers);
     const project_name = answers.name;    //项目名称
 
     // 模版文件目录
@@ -68,11 +69,27 @@ inquirer.prompt([
     const project_file = path.join(cwd, project_name); // 获取项目文件夹路径
     // 判断是否已经创建过同名的项目文件夹
     if (fs.existsSync(project_file)) {
-        await fs.remove(targetAir)
+        await inquirer.prompt([
+            {
+                type: "confirm",
+                name: "IsRemove",
+                message: "是否删除重复的文件夹？",
+                default: "Y"
+            }
+        ]).then(async res => {
+            if (res.IsRemove) {
+                await fs.remove(project_file);
+            }
+        })
     }
-    // 开始创建项目
-    const generator = new Generator(project_name, project_file);
-    await generator.create();
+    fs.copy(destUrl, project_file)
+        .then(() => {
+            console.log('success!')
+            // npminstall({
+            //     root: project_file,
+            // });
+        })
+        .catch(err => console.error(err))
 })
 
 
