@@ -8,16 +8,8 @@
     "client:prod": "scripty",
     "client:server": "scripty"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/wwei-github/react_template.git"
-  },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/wwei-github/react_template/issues"
-  },
-  "homepage": "https://github.com/wwei-github/react_template#readme",
   "dependencies": {
     "axios": "^0.25.0",
     "qs": "^6.10.3",

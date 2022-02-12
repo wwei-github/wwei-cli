@@ -84,7 +84,21 @@ inquirer.prompt([
     }
     fs.copy(destUrl, project_file)
         .then(() => {
-            console.log('success!')
+            let packageText = fs.readFileSync(`${project_file}/package.json`,'utf-8');
+            packageText = packageText.replace(/react_template/g,project_name)
+            fs.writeFile(`${project_file}/package.json`,packageText,'utf-8',(err)=>{
+                if(!err) return 
+                console.error(err)
+            })
+
+            let packagelockText = fs.readFileSync(`${project_file}/package-lock.json`,'utf-8');
+            packagelockText = packagelockText.replace(/react_template/g,project_name)
+            fs.writeFile(`${project_file}/package-lock.json`,packagelockText,'utf-8',(err)=>{
+                if(!err) return 
+                console.error(err)
+            })
+
+            console.log('success!');
             // npminstall({
             //     root: project_file,
             // });
