@@ -2,6 +2,9 @@ import React, { FC } from 'react';
 import { Suspense } from 'react';
 import { Routes, Route, RouteProps } from 'react-router';
 
+import Loading from "@components/Loading/Loading";
+import NotFound from "@pages/NotFound/NotFound";
+
 const Home = React.lazy(() => import("@pages/Home/Home"));
 
 // 定义路有集合
@@ -15,7 +18,7 @@ export const routes: RouteProps[] = [
 export const RoutesList: FC = () => {
   return (
     <>
-      <Suspense fallback={<>Loading...</>}>
+      <Suspense fallback={<Loading />}>
         <Routes>
           {
             routes.map((r, index) => {
@@ -28,7 +31,7 @@ export const RoutesList: FC = () => {
               )
             })
           }
-          <Route path='*' element={<>Not Found</>} />
+          <Route path='*' element={<NotFound />} />
         </Routes>
       </Suspense>
     </>

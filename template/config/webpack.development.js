@@ -1,7 +1,6 @@
 const { join, resolve } = require('path');
 
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const FriendlyErrorsWebpackPlugin = require("@soda/friendly-errors-webpack-plugin");
 
 module.exports = {
     mode:"development",
@@ -19,7 +18,6 @@ module.exports = {
     },
     devtool: "source-map",
     plugins:[
-        new FriendlyErrorsWebpackPlugin(),
         new HtmlWebpackPlugin({
             title:"配置名字",
             filename:"index.html",
