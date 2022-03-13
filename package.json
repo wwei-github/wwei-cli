@@ -1,44 +1,29 @@
 {
   "name": "wwei-cli",
-  "version": "2.1.0",
-  "description": "> 自制简单的脚手架，方便自己初始化项目",
+  "version": "1.0.6",
+  "description": "",
   "main": "./index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
-    "wwei-cli": "index.js"
+    "wwei-cli": "./index.js"
   },
   "keywords": [
     "脚手架",
-    "wwei",
-    "cli"
+    "wwei"
   ],
   "author": "wwei",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.25.0",
-    "colors": "^1.4.0",
     "commander": "^8.3.0",
-    "cross-spawn": "^7.0.3",
     "download-git-repo": "^3.0.2",
     "ejs": "^3.1.6",
     "figlet": "^1.5.2",
     "fs-extra": "^10.0.0",
     "inquirer": "^8.2.0",
     "npminstall": "^5.4.1",
-    "ora": "^6.0.1",
-    "spinnies": "^0.5.1"
-  },
-  "directories": {
-    "lib": "lib"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/wwei-github/wwei-cli.git"
-  },
-  "bugs": {
-    "url": "https://github.com/wwei-github/wwei-cli/issues"
-  },
-  "homepage": "https://github.com/wwei-github/wwei-cli#readme"
+    "ora": "^6.0.1"
+  }
 }

@@ -12,38 +12,34 @@ const ejs = require('ejs')
 const { program } = require('commander');
 const fs = require('fs-extra');   // fs的扩展，支持promise
 const figlet = require('figlet');
-const Spinnies = require('spinnies');
-const configList = require('./fileConfig/configData');
-const { npmRun, checkYarnVersion } = require('./utils')
-const colors = require('colors');
 
-const spinner = { interval: 160, frames: ['🍇', '🍈', '🍉', '🍋', '🚀', '🤔', '🐮'] }
-const spinnie = new Spinnies({ spinner });
+// const Generator = require('./lib/Generator');
+// const npminstall = require('npminstall');
+
 /* 
  * 控制台打印logo
 */
 console.log(
-    colors.rainbow(
-        figlet.textSync('Hi,wwei', {
-            font: 'Dr Pepper',
-            horizontalLayout: 'default',
-            verticalLayout: 'default',
-            width: 80,
-            whitespaceBreak: true
-        })
-    )
+    figlet.textSync('Hi,wwei', {
+        font: 'Dr Pepper',
+        horizontalLayout: 'default',
+        verticalLayout: 'default',
+        width: 80,
+        whitespaceBreak: true
+    })
 )
-
 /*
  * 脚手架命令
 */
+let project_default = 'my-project';
 program
     .version(version)
     .command('create <project-name>')
     .description('create a new project')
     .action(name => {
         // 打印命令行输入的值
-        configList[0].default = name;
+        project_default = name;
+        console.log("project name is " + name)
     })
     .option('-d, --debug', '-d 命令说明');
 
@@ -54,139 +50,60 @@ if (options.debug) {
     console.log('debug:', options.debug);
     return
 };
-try {
-    inquirer.prompt(configList).then(async answers => {
 
-        const usePackType = answers.usePackType
+inquirer.prompt([
+    {
+        type: 'input', //type： input, number, confirm, list, checkbox ... 
+        name: 'name', // key 名
+        message: '项目命名：', // 提示信息
+        default: project_default// 默认值
+    }
+]).then(async answers => {
+    const project_name = answers.name;    //项目名称
 
-        const project_name = answers.name;    //项目名称
-
-
-        const catalogueConfig = path.join(__dirname, 'template/template_React');  // 模版文件目录
-        const cwd = process.cwd();  // process.cwd() 对应控制台所在目录
-        const project_file = path.join(cwd, project_name); // 获取项目文件夹路径
-
-        if (usePackType === 'yarn' && !checkYarnVersion(usePackType, project_file, ['--version'])) {
-            console.log("请检查yarn是否安装！".underline.bgBrightRed)
-            process.exit(1);
-        }
-
-        // 安装方式
-        const installType = usePackType === 'yarn' ? 'add' : 'install';
-
-
-        // 判断是否已经创建过同名的项目文件夹
-        if (fs.existsSync(project_file)) {
-            await inquirer.prompt([
-                {
-                    type: "confirm",
-                    name: "IsRemove",
-                    message: "是否删除重复的文件夹？",
-                    default: "Y"
-                }
-            ]).then(async res => {
-                if (res.IsRemove) {
-                    await fs.remove(project_file);
-                }
-            })
-        }
-
-        // 先配置目录结构
-        spinnie.add('catalogueConfig', { text: '创建目录结构ing...' });
-        fs.copySync(catalogueConfig, project_file);
-        spinnie.succeed('catalogueConfig', { text: '创建目录结构成功!' });
-
-
-        npmRun(usePackType, project_file,
-            ['init', '-y'],
+    // 模版文件目录
+    const destUrl = path.join(__dirname, 'template');
+    // 生成文件目录
+    // process.cwd() 对应控制台所在目录
+    const cwd = process.cwd();
+    const project_file = path.join(cwd, project_name); // 获取项目文件夹路径
+    // 判断是否已经创建过同名的项目文件夹
+    if (fs.existsSync(project_file)) {
+        await inquirer.prompt([
             {
-                start: 'npm初始化ing...',
-                end: 'npm init end...',
+                type: "confirm",
+                name: "IsRemove",
+                message: "是否删除重复的文件夹？",
+                default: "Y"
+            }
+        ]).then(async res => {
+            if (res.IsRemove) {
+                await fs.remove(project_file);
+            }
+        })
+    }
+    fs.copy(destUrl, project_file)
+        .then(() => {
+            let packageText = fs.readFileSync(`${project_file}/package.json`,'utf-8');
+            packageText = packageText.replace(/react_template/g,project_name)
+            fs.writeFile(`${project_file}/package.json`,packageText,'utf-8',(err)=>{
+                if(!err) return 
+                console.error(err)
             })
 
-        if (answers.useFrame === 'react') {
-            npmRun(usePackType, project_file,
-                [installType, 'react', 'react-dom', 'react-router-dom', 'recoil'],
-                {
-                    start: 'React初始化ing...',
-                    end: 'React安装完成...',
-                });
-        }
+            let packagelockText = fs.readFileSync(`${project_file}/package-lock.json`,'utf-8');
+            packagelockText = packagelockText.replace(/react_template/g,project_name)
+            fs.writeFile(`${project_file}/package-lock.json`,packagelockText,'utf-8',(err)=>{
+                if(!err) return 
+                console.error(err)
+            })
 
-        if (answers.usePack === 'webpack') {
-            npmRun(usePackType, project_file,
-                [installType, 'webpack', 'webpack-cli', 'webpack-dev-server',
-                    'webpack-merge', 'scripty', 'mini-css-extract-plugin', 'html-webpack-plugin',
-                    'clean-webpack-plugin', 'yargs-parser', 'css-loader', 'postcss-loader', '-D'],
-                {
-                    start: 'webpack初始化ing...',
-                    end: 'webpack安装完成...',
-                });
-
-            // 将script脚本放到相应的位置
-            const clientFile = path.join(__dirname, 'template/scripts/client');
-            const clientFileTo = path.join(project_file, 'scripts/client');
-            fs.copySync(clientFile, clientFileTo);
-
-            const packageFile = path.join(project_file, 'package.json');
-            const packageObj = fs.readJsonSync(packageFile);
-            packageObj.scripts = {
-                "client:dev": "scripty",
-                "client:prod": "scripty",
-                "client:server": "scripty"
-            }
-            // 向package写入命令行
-            fs.writeJsonSync(packageFile, packageObj)
-
-
-            // 将webpack放到相应的位置
-            const webpackFile = path.join(__dirname, 'template/webpack');
-            const webpackFileTo = path.join(project_file, 'config');
-            fs.copySync(webpackFile, webpackFileTo);
-
-            const webpackConfig = path.join(webpackFileTo, 'webpack.config.js');
-            const webpackConfigTo = path.join(project_file, 'webpack.config.js');
-            fs.moveSync(webpackConfig, webpackConfigTo); // 将webpack.config.js 文件移动到根目录下
-
-
-        }
-
-        if (answers.useLanguage === 'ts') {
-            npmRun(usePackType, project_file,
-                [installType, 'typescript',],
-                {
-                    start: 'TypeScript初始化ing...',
-                    end: 'TypeScript安装完成...',
-                });
-            // 将TypeSctipt配置放到相应的位置
-            const tsFile = path.join(__dirname, 'template/typescript');
-            fs.copySync(tsFile, project_file);
-        }
-
-        if (answers.useCompile === 'babel') {
-            npmRun(usePackType, project_file,
-                [installType, '@babel/core', '@babel/preset-env', '@babel/preset-react', '@babel/preset-typescript',
-                    'babel-loader'],
-                {
-                    start: 'babel初始化ing...',
-                    end: 'babel安装完成...',
-                });
-            // 将TypeSctipt配置放到相应的位置
-            const tsFile = path.join(__dirname, 'template/babel');
-            fs.copySync(tsFile, project_file);
-        }
-
-        npmRun(usePackType, project_file, [installType, '@soda/friendly-errors-webpack-plugin', '--save-dev'], {
-            start: '其他依赖安装ing...',
-            end: '其他依赖安装完成...',
-        });
-
-    })
-} catch (err) {
-    console.log(`error:${err}`.red);
-    process.exit(1);
-}
-
-
+            console.log('success!');
+            // npminstall({
+            //     root: project_file,
+            // });
+        })
+        .catch(err => console.error(err))
+})
 
 
