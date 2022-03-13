@@ -32,7 +32,7 @@ console.log(
             whitespaceBreak: true
         })
     )
-)
+) 
 
 /*
  * 脚手架命令
