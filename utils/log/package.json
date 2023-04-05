@@ -1,17 +1,14 @@
 {
-  "name": "@wwei-cli/core",
+  "name": "@wwei-cli/log",
   "version": "1.0.0",
-  "description": "wwei-cli的core包",
+  "description": "log",
   "keywords": [
-    "cli",
-    "wwei-cli",
-    "core"
+    "log"
   ],
   "author": "wwei-github <418047394@qq.com>",
   "homepage": "https://github.com/wwei-github/wwei-cli#readme",
   "license": "ISC",
   "main": "lib/index.js",
-  "bin": "lib/index.js",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
@@ -19,9 +16,6 @@
   "files": [
     "lib"
   ],
-  "publishConfig": {
-    "access": "public"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/wwei-github/wwei-cli.git"
@@ -31,5 +25,8 @@
   },
   "bugs": {
     "url": "https://github.com/wwei-github/wwei-cli/issues"
+  },
+  "dependencies": {
+    "npmlog": "^7.0.1"
   }
 }
