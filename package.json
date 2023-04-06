@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "lerna": "^6.6.1"
+    "lerna": "^5.3.0"
   },
   "workspaces": [
     "commands/*",

@@ -29,5 +29,8 @@
   },
   "bugs": {
     "url": "https://github.com/wwei-github/wwei-cli/issues"
+  },
+  "dependencies": {
+    "esm": "^3.2.25"
   }
 }

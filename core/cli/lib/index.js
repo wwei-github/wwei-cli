@@ -17,7 +17,7 @@ const constants = require("./const");
 
 let args;
 
-function core() {
+async function core() {
   try {
     checkPkgVersion();
     checkNodeVersion();
@@ -25,8 +25,24 @@ function core() {
     checkUserHome();
     checkInputArgs();
     checkEnv();
+    await checkNpmVersion();
   } catch (e) {
     log.error("Error", e.message);
+  }
+}
+
+async function checkNpmVersion() {
+  const npmName = pkg.name;
+  const version = pkg.version;
+  const { getNpmSemverVersion } = require("@wwei-cli/get-npm-info");
+  const lastVersion = await getNpmSemverVersion(version, npmName);
+  if (lastVersion) {
+    log.warn(
+      "更新提示",
+      `${npmName} 当前版本: ${colors.blue(version)}, 最新版本: ${colors.red(
+        lastVersion
+      )}, 请手动进行更新: npm install ${npmName} -g`
+    );
   }
 }
 

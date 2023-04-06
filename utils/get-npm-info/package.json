@@ -1,19 +1,11 @@
 {
-  "name": "@wwei-cli/core",
+  "name": "@wwei-cli/get-npm-info",
   "version": "1.0.0",
-  "description": "wwei-cli的core包",
-  "keywords": [
-    "cli",
-    "wwei-cli",
-    "core"
-  ],
+  "description": "get npm info",
   "author": "wwei-github <418047394@qq.com>",
   "homepage": "https://github.com/wwei-github/wwei-cli#readme",
   "license": "ISC",
   "main": "lib/index.js",
-  "bin": {
-    "wwei-cli": "bin/index.js"
-  },
   "directories": {
     "lib": "lib",
     "test": "__tests__"
@@ -29,22 +21,15 @@
     "url": "git+https://github.com/wwei-github/wwei-cli.git"
   },
   "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "test": "node ./__tests__/@wwei-cli/get-npm-info.test.js"
   },
   "bugs": {
     "url": "https://github.com/wwei-github/wwei-cli/issues"
   },
   "dependencies": {
-    "@wwei-cli/get-npm-info": "workspace:^1.0.0",
-    "@wwei-cli/log": "workspace:^1.0.0",
-    "colors": "^1.4.0",
-    "dotenv": "^16.0.3",
-    "import-local": "^3.1.0",
-    "minimist": "^1.2.8",
-    "npmlog": "^7.0.1",
-    "path-exists": "^5.0.0",
-    "root-check": "^2.0.0",
+    "axios": "^1.3.5",
+    "esm": "^3.2.25",
     "semver": "^7.3.8",
-    "user-home": "^3.0.0"
+    "url-join": "^5.0.0"
   }
 }

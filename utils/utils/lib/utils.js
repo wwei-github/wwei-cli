@@ -1,7 +1,10 @@
 'use strict';
 
-module.exports = utils;
-
-function utils() {
-    // TODO
+function requireESM(moduleName) {
+  const esmRequire = require("esm")(module);
+  const esmModule = esmRequire(moduleName);
+  return esmModule.default || esmModule;
 }
+  
+module.exports = { requireESM };
+
