@@ -35,12 +35,14 @@
     "url": "https://github.com/wwei-github/wwei-cli/issues"
   },
   "dependencies": {
+    "@wwei-cli/exec": "workspace:^",
     "@wwei-cli/get-npm-info": "workspace:^1.0.0",
+    "@wwei-cli/init": "workspace:^",
     "@wwei-cli/log": "workspace:^1.0.0",
     "colors": "^1.4.0",
+    "commander": "^10.0.0",
     "dotenv": "^16.0.3",
     "import-local": "^3.1.0",
-    "minimist": "^1.2.8",
     "npmlog": "^7.0.1",
     "path-exists": "^5.0.0",
     "root-check": "^2.0.0",

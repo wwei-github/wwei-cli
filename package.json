@@ -10,6 +10,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@wwei-cli/core": "workspace:^",
+    "@wwei-cli/exec": "workspace:^",
+    "@wwei-cli/log": "workspace:^",
+    "@wwei-cli/package": "workspace:^",
+    "@wwei-cli/utils": "workspace:^",
+    "commander": "^10.0.0",
     "lerna": "^5.3.0"
   },
   "workspaces": [

@@ -1,10 +1,8 @@
 'use strict';
 
-function requireESM(moduleName) {
-  const esmRequire = require("esm")(module);
-  const esmModule = esmRequire(moduleName);
-  return esmModule.default || esmModule;
+function isObject(o) {
+  return Object.prototype.toString.call(o) === "[object Object]";
 }
-  
-module.exports = { requireESM };
+
+module.exports = { isObject };
 
