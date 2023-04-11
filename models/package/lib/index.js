@@ -1,6 +1,9 @@
 "use strict";
 
+const path = require("path");
+
 const { isObject } = require("@wwei-cli/utils");
+const formatPath = require("@wwei-cli/format-path");
 
 class Package {
   constructor(options) {
@@ -10,11 +13,8 @@ class Package {
     if (!isObject(options)) {
       throw new Error("Package类options参数必须是对象");
     }
-    console.log("options", options);
     // package 路径
     this.targetPath = options.targetPath;
-    // package 存储路径
-    this.storePath = options.storePath;
     // package name
     this.packageName = options.PackageName;
     // package version
@@ -26,6 +26,19 @@ class Package {
   install() {}
   // 更新 package
   update() {}
+  // 获取文件入口路径
+  async getRootFilePath() {
+    const { packageDirectorySync } = await import("pkg-dir");
+    const pkgDir = packageDirectorySync(this.targetPath);
+    if (pkgDir) {
+      const pkg = require(path.resolve(pkgDir, "package.json"));
+      if (pkg && pkg.main) {
+        console.log(pkgDir);
+        return formatPath(path.resolve(pkgDir, pkg.main));
+      }
+    }
+    return null;
+  }
 }
 
 module.exports = Package;

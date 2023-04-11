@@ -1,5 +1,5 @@
 {
-  "name": "@wwei-cli/package",
+  "name": "@wwei-cli/format-path",
   "version": "1.0.0",
   "description": "> TODO: description",
   "author": "wwei-github <418047394@qq.com>",
@@ -21,14 +21,9 @@
     "url": "git+https://github.com/wwei-github/wwei-cli.git"
   },
   "scripts": {
-    "test": "node ./__tests__/@wwei-cli/package.test.js"
+    "test": "node ./__tests__/@wwei-cli/format-path.test.js"
   },
   "bugs": {
     "url": "https://github.com/wwei-github/wwei-cli/issues"
-  },
-  "dependencies": {
-    "@wwei-cli/format-path": "workspace:^",
-    "@wwei-cli/utils": "workspace:^",
-    "pkg-dir": "^7.0.0"
   }
 }

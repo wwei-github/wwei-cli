@@ -7,7 +7,7 @@ const SETTINGS = {
   init: "@wwei-cli/init",
 };
 
-function exec() {
+async function exec() {
   const homePath = process.env.CLI_HOME_PATH;
   const targetPath = process.env.CLI_TARGET_PATH;
   log.verbose("homePath", homePath);
@@ -23,6 +23,7 @@ function exec() {
     packageName,
     packageVersion,
   });
+  console.log(await pkg.getRootFilePath());
 }
 
 module.exports = exec;
