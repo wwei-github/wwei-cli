@@ -25,6 +25,9 @@ async function core() {
     registerCommand();
   } catch (e) {
     log.error("Error", colors.red(e.message));
+    if (program.debug) {
+      console.log(e);
+    }
   }
 }
 

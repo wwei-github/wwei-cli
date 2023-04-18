@@ -21,7 +21,7 @@ async function getNpmInfo(pkgName, registry) {
     });
 }
 
-function getDefaultRegistry(isNpm = false) {
+function getDefaultRegistry(isNpm = true) {
   return isNpm
     ? "https://registry.npmjs.org"
     : "http://registry.npm.taobao.org";
@@ -49,4 +49,18 @@ async function getNpmSemverVersion(baseVersion, pkgName, registry) {
   return null;
 }
 
-module.exports = { getNpmInfo, getNpmVersions, getNpmSemverVersion };
+async function getLatestVersion(pkgName, registry) {
+  const versions = await getSemverVersions(pkgName, registry);
+  if (versions && versions.length > 0) {
+    return versions.sort((a, b) => semver.gt(b, a))[0];
+  }
+  return null;
+}
+
+module.exports = {
+  getNpmInfo,
+  getNpmVersions,
+  getNpmSemverVersion,
+  getDefaultRegistry,
+  getLatestVersion,
+};
