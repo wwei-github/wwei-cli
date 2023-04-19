@@ -50,7 +50,7 @@ async function getNpmSemverVersion(baseVersion, pkgName, registry) {
 }
 
 async function getLatestVersion(pkgName, registry) {
-  const versions = await getSemverVersions(pkgName, registry);
+  const versions = await getNpmVersions(pkgName, registry);
   if (versions && versions.length > 0) {
     return versions.sort((a, b) => semver.gt(b, a))[0];
   }

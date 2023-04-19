@@ -53,6 +53,7 @@ async function exec() {
     });
   }
   const rootFile = await pkg.getRootFilePath();
+  console.log("rootFile", rootFile);
   if (rootFile) {
     require(rootFile).apply(null, arguments);
   }

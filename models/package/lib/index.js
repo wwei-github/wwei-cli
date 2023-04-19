@@ -100,15 +100,27 @@ class Package {
   }
   // 获取文件入口路径
   async getRootFilePath() {
-    const { packageDirectorySync } = await import("pkg-dir");
-    const pkgDir = packageDirectorySync({ cwd: this.targetPath });
-    if (pkgDir) {
-      const pkg = require(path.resolve(pkgDir, "package.json"));
-      if (pkg && pkg.main) {
-        return formatPath(path.resolve(pkgDir, pkg.main));
+    async function _getFilePath(targetPath) {
+      const { packageDirectorySync } = await import("pkg-dir");
+      const pkgDir = packageDirectorySync({ cwd: targetPath });
+      if (pkgDir) {
+        const pkg = require(path.resolve(pkgDir, "package.json"));
+        if (pkg && pkg.main) {
+          return formatPath(path.resolve(pkgDir, pkg.main));
+        }
       }
+      return null;
     }
-    return null;
+    let result;
+    if (this.storeDir) {
+      // 没有指定target，则从缓存目录中取包，找到入口人间
+      // /Users/wwei/.wwei-cli/dependencies/node_modules/.store/@imooc-cli+init@1.0.1/node_modules/@imooc-cli/init/lib/index.js
+      result = await _getFilePath(this.cacheFilePath);
+    } else {
+      // 有指定的targetPath，则从指定的目录中找
+      result = await _getFilePath(this.targetPath);
+    }
+    return result;
   }
 }
 
