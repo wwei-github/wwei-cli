@@ -53,6 +53,7 @@ class Package {
       await this.prepare();
       return pathExistsSync(this.cacheFilePath);
     } else {
+      // 按理说这步应该没有必要
       return pathExistsSync(this.targetPath);
     }
   }

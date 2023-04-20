@@ -10,14 +10,18 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@wwei-cli/command": "workspace:^",
     "@wwei-cli/core": "workspace:^",
     "@wwei-cli/exec": "workspace:^",
     "@wwei-cli/format-path": "workspace:^",
     "@wwei-cli/get-npm-info": "workspace:^",
+    "@wwei-cli/init": "workspace:^",
     "@wwei-cli/log": "workspace:^",
     "@wwei-cli/package": "workspace:^",
     "@wwei-cli/utils": "workspace:^",
-    "lerna": "^5.3.0"
+    "colors": "^1.4.0",
+    "lerna": "^5.3.0",
+    "semver": "^7.3.8"
   },
   "workspaces": [
     "commands/*",

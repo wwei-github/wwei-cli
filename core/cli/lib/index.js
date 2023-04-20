@@ -5,7 +5,6 @@
 // .json 会调用JSON.parse()对内容进行解析
 // 其他类型 会按照js文件格式进行加载，如果内容是js代码，则可以被成功加载
 const Commander = require("commander");
-const semver = require("semver");
 const colors = require("colors");
 const userHome = require("user-home");
 const path = require("path");
@@ -43,7 +42,7 @@ function registerCommand() {
     .command("init")
     .description("初始化项目")
     .argument("[projectName]", "项目名称")
-    .option("-f, --force", "是否强制初始化项目")
+    .option("-f, --force", "是否强制初始化项目", false)
     .action(exec);
 
   // 监听debug
@@ -87,7 +86,6 @@ function registerCommand() {
 // 初始化检查
 async function prepare() {
   checkPkgVersion();
-  checkNodeVersion();
   checkRoot();
   checkUserHome();
   checkEnv();
@@ -144,19 +142,7 @@ async function checkRoot() {
   rootCheck();
 }
 
-function checkNodeVersion() {
-  const version = process.version;
-  const lowNodeVersion = constants.LOW_NODE_VERSION;
-  if (!semver.gte(version, lowNodeVersion)) {
-    throw new Error(
-      colors.red(
-        `当前Node版本: ${colors.green(
-          version
-        )}, wwei-cli 需要Node版本 >= ${colors.blue(lowNodeVersion)}`
-      )
-    );
-  }
-}
+
 
 function checkPkgVersion() {
   log.info("version", pkg.version);

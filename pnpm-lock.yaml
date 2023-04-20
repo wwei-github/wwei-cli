@@ -4,6 +4,9 @@ importers:
 
   .:
     dependencies:
+      '@wwei-cli/command':
+        specifier: workspace:^
+        version: link:models/command
       '@wwei-cli/core':
         specifier: workspace:^
         version: link:core/cli
@@ -16,6 +19,9 @@ importers:
       '@wwei-cli/get-npm-info':
         specifier: workspace:^
         version: link:utils/get-npm-info
+      '@wwei-cli/init':
+        specifier: workspace:^
+        version: link:commands/init
       '@wwei-cli/log':
         specifier: workspace:^
         version: link:utils/log
@@ -25,9 +31,15 @@ importers:
       '@wwei-cli/utils':
         specifier: workspace:^
         version: link:utils/utils
+      colors:
+        specifier: ^1.4.0
+        version: 1.4.0
       lerna:
         specifier: ^5.3.0
         version: 5.6.2
+      semver:
+        specifier: ^7.3.8
+        version: 7.3.8
 
   commands/init: {}
 
@@ -81,6 +93,8 @@ importers:
       '@wwei-cli/package':
         specifier: workspace:^
         version: link:../../models/package
+
+  models/command: {}
 
   models/package:
     dependencies:
