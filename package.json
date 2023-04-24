@@ -20,6 +20,8 @@
     "@wwei-cli/package": "workspace:^",
     "@wwei-cli/utils": "workspace:^",
     "colors": "^1.4.0",
+    "fs-extra": "^11.1.1",
+    "inquirer": "^8.2.5",
     "lerna": "^5.3.0",
     "semver": "^7.3.8"
   },

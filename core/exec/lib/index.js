@@ -1,6 +1,7 @@
 "use strict";
 
 const path = require("path");
+const cp = require("child_process");
 const Package = require("@wwei-cli/package");
 const log = require("@wwei-cli/log");
 
@@ -55,11 +56,43 @@ async function exec() {
   const rootFile = await pkg.getRootFilePath();
   if (rootFile) {
     try {
-      require(rootFile).call(null, Array.from(arguments));
+      const args = Array.from(arguments);
+      const cmd = args[args.length - 1];
+      const o = Object.create(null);
+      Object.keys(cmd).forEach((item) => {
+        if (
+          cmd.hasOwnProperty(item) &&
+          item !== "parent" &&
+          !item.startsWith("_")
+        ) {
+          o[item] = cmd[item];
+        }
+      });
+      args[args.length - 1] = o;
+      const code = `require('${rootFile}').call(null, ${JSON.stringify(args)})`;
+      const child = spawn("node", ["-e", code], {
+        cwd: process.cwd(),
+        stdio: "inherit",
+      });
+      child.on("error", (err) => {
+        log.error("error", err);
+        process.exit(0);
+      });
+      child.on("exit", (e) => {
+        log.verbose("exit", "命令执行完毕");
+        process.exit(e);
+      });
     } catch (e) {
       log.error("error", e.message);
     }
   }
+}
+
+function spawn(command, argv, options) {
+  const win32 = process.platform === "win32";
+  command = win32 ? "cmd" : command;
+  argv = win32 ? ["/c"].concat(command, argv) : argv;
+  return cp.spawn(command, argv, options);
 }
 
 module.exports = exec;
