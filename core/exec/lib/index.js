@@ -1,9 +1,9 @@
 "use strict";
 
 const path = require("path");
-const cp = require("child_process");
 const Package = require("@wwei-cli/package");
 const log = require("@wwei-cli/log");
+const { spawn } = require("@wwei-cli/utils");
 
 const SETTINGS = {
   init: "@wwei-cli/init",
@@ -38,12 +38,16 @@ async function exec() {
       packageName,
       packageVersion,
     });
-    if (await pkg.exists()) {
-      // 更新package
-      await pkg.update();
-    } else {
-      // 安装package
-      await pkg.install();
+    try {
+      if (await pkg.exists()) {
+        // 更新package
+        await pkg.update();
+      } else {
+        // 安装package
+        await pkg.install();
+      }
+    } catch (e) {
+      log.error("Error:", e.message);
     }
   } else {
     // 在指定目录初始化
@@ -88,11 +92,6 @@ async function exec() {
   }
 }
 
-function spawn(command, argv, options) {
-  const win32 = process.platform === "win32";
-  command = win32 ? "cmd" : command;
-  argv = win32 ? ["/c"].concat(command, argv) : argv;
-  return cp.spawn(command, argv, options);
-}
+
 
 module.exports = exec;

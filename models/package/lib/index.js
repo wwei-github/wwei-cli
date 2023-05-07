@@ -41,7 +41,10 @@ class Package {
       mkdirpSync(this.storeDir);
     }
     // 获取最新的版本号
-    if (this.packageVersion === "latest") {
+    if (
+      this.packageVersion === "latest" ||
+      this.packageVersion.startsWith("^")
+    ) {
       this.packageVersion = await getLatestVersion(this.packageName);
     }
   }
@@ -85,8 +88,7 @@ class Package {
     const latestCacheFilePath = this.getLatestCacheFilePath(latestVersion);
     if (!pathExistsSync(latestCacheFilePath)) {
       // 没有最新的文件路径 需要进行安装
-      this.packageVersion = latestVersion;
-      return npminstall({
+      await npminstall({
         root: this.targetPath,
         storeDir: this.storeDir,
         registry: getDefaultRegistry(),
@@ -97,6 +99,9 @@ class Package {
           },
         ],
       });
+      this.packageVersion = latestVersion;
+    } else {
+      this.packageVersion = latestVersion;
     }
   }
   // 获取文件入口路径

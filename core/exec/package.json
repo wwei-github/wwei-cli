@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "@wwei-cli/log": "workspace:^",
-    "@wwei-cli/package": "workspace:^"
+    "@wwei-cli/package": "workspace:^",
+    "@wwei-cli/utils": "workspace:^"
   }
 }
