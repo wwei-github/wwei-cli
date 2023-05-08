@@ -36,5 +36,6 @@
     "inquirer": "^8.2.5",
     "kebab-case": "^1.0.2",
     "user-home": "^3.0.0"
-  }
+  },
+  "gitHead": "5a156f4a88c31abd99c6c294478a158b1d15b51e"
 }

@@ -30,5 +30,6 @@
     "@wwei-cli/log": "workspace:^",
     "@wwei-cli/package": "workspace:^",
     "@wwei-cli/utils": "workspace:^"
-  }
+  },
+  "gitHead": "5a156f4a88c31abd99c6c294478a158b1d15b51e"
 }
