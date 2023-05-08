@@ -1,6 +1,6 @@
 {
   "name": "@wwei-cli/core",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "wwei-cli的core包",
   "keywords": [
     "cli",
@@ -36,9 +36,9 @@
   },
   "dependencies": {
     "@wwei-cli/exec": "workspace:^",
-    "@wwei-cli/get-npm-info": "workspace:^1.0.0",
+    "@wwei-cli/get-npm-info": "workspace:^1.0.1",
     "@wwei-cli/init": "workspace:^",
-    "@wwei-cli/log": "workspace:^1.0.0",
+    "@wwei-cli/log": "workspace:^1.0.1",
     "colors": "^1.4.0",
     "commander": "^10.0.0",
     "dotenv": "^16.0.3",
