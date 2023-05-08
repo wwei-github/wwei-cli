@@ -107,13 +107,13 @@ importers:
         specifier: workspace:^
         version: link:../exec
       '@wwei-cli/get-npm-info':
-        specifier: workspace:^1.0.1
+        specifier: workspace:^1.0.2
         version: link:../../utils/get-npm-info
       '@wwei-cli/init':
         specifier: workspace:^
         version: link:../../commands/init
       '@wwei-cli/log':
-        specifier: workspace:^1.0.1
+        specifier: workspace:^1.0.2
         version: link:../../utils/log
       colors:
         specifier: ^1.4.0
