@@ -27,6 +27,7 @@
     "url": "https://github.com/wwei-github/wwei-cli/issues"
   },
   "dependencies": {
+    "@wwei-cli/command": "workspace:^",
     "@wwei-cli/package": "workspace:^",
     "@wwei-cli/request": "workspace:^",
     "@wwei-cli/utils": "workspace:^",

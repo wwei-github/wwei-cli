@@ -73,6 +73,9 @@ importers:
 
   commands/init:
     dependencies:
+      '@wwei-cli/command':
+        specifier: workspace:^
+        version: link:../../models/command
       '@wwei-cli/package':
         specifier: workspace:^
         version: link:../../models/package
