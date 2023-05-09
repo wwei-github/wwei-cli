@@ -1,6 +1,6 @@
 {
   "name": "@wwei-cli/core",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "wwei-cli的core包",
   "keywords": [
     "cli",
