@@ -1,6 +1,6 @@
 {
   "name": "@wwei-cli/get-npm-info",
-  "version": "1.0.3",
+  "version": "2.0.0",
   "description": "get npm info",
   "author": "wwei-github <418047394@qq.com>",
   "homepage": "https://github.com/wwei-github/wwei-cli#readme",
