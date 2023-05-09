@@ -9,6 +9,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "@wwei-cli/command": "workspace:^",
     "@wwei-cli/core": "workspace:^",
