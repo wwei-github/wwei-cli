@@ -158,7 +158,11 @@ importers:
         specifier: workspace:^
         version: link:../../utils/utils
 
-  models/command: {}
+  models/command:
+    dependencies:
+      colors:
+        specifier: ^1.4.0
+        version: 1.4.0
 
   models/package:
     dependencies:

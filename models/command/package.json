@@ -1,6 +1,6 @@
 {
   "name": "@wwei-cli/command",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "> TODO: description",
   "author": "wwei-github <418047394@qq.com>",
   "homepage": "https://github.com/wwei-github/wwei-cli#readme",
@@ -26,5 +26,8 @@
   "bugs": {
     "url": "https://github.com/wwei-github/wwei-cli/issues"
   },
-  "gitHead": "5a156f4a88c31abd99c6c294478a158b1d15b51e"
+  "gitHead": "5a156f4a88c31abd99c6c294478a158b1d15b51e",
+  "dependencies": {
+    "colors": "^1.4.0"
+  }
 }
