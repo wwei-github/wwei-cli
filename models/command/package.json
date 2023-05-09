@@ -28,6 +28,7 @@
   },
   "gitHead": "5a156f4a88c31abd99c6c294478a158b1d15b51e",
   "dependencies": {
+    "@wwei-cli/log": "workspace:^",
     "colors": "^1.4.0"
   }
 }

@@ -160,6 +160,9 @@ importers:
 
   models/command:
     dependencies:
+      '@wwei-cli/log':
+        specifier: workspace:^
+        version: link:../../utils/log
       colors:
         specifier: ^1.4.0
         version: 1.4.0
