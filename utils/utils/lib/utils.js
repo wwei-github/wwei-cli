@@ -25,8 +25,8 @@ function sleep(time = 2000) {
 
 function spawn(command, argv, options) {
   const win32 = process.platform === "win32";
-  command = win32 ? "cmd" : command;
   argv = win32 ? ["/c"].concat(command, argv) : argv;
+  command = win32 ? "cmd" : command;
   return cp.spawn(command, argv, options);
 }
 
