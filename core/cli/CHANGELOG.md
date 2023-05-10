@@ -1,5 +1,12 @@
 # @wwei-cli/core
 
+## 2.0.1
+
+### Patch Changes
+
+- @wwei-cli/init@2.0.1
+- @wwei-cli/exec@2.0.1
+
 ## 2.0.0
 
 ### Major Changes

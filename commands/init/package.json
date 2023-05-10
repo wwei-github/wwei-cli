@@ -1,6 +1,6 @@
 {
   "name": "@wwei-cli/init",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "初始化项目 command",
   "author": "wwei-github <418047394@qq.com>",
   "homepage": "https://github.com/wwei-github/wwei-cli#readme",
